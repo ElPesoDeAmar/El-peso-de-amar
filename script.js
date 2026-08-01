@@ -1,61 +1,42 @@
-// Detectar el capítulo actual a partir del nombre del archivo
-const paginaActual = window.location.pathname.split("/").pop();
+// Detectar el archivo actual
+const paginaActual = window.location.pathname.split("/").pop() || "prologo.html";
 
-// Orden de lectura del libro
+// Lista ordenada de tu libro
 const ordenCapitulos = [
-    "prologo.html",
-    "capitulo1.html",
-    "capitulo2.html",
-    "capitulo3.html",
-    "capitulo4.html",
-    "capitulo5.html",
-    "capitulo6.html",
-    "epilogo.html"
+    { archivo: "prologo.html", titulo: "Ir al Capítulo I" },
+    { archivo: "capitulo1.html", titulo: "Siguiente: Capítulo I" },
+    { archivo: "capitulo2.html", titulo: "Siguiente: Capítulo II" },
+    { archivo: "capitulo3.html", titulo: "Siguiente: Capítulo III" },
+    { archivo: "capitulo4.html", titulo: "Siguiente: Capítulo IV" },
+    { archivo: "capitulo5.html", titulo: "Siguiente: Capítulo V" },
+    { archivo: "capitulo6.html", titulo: "Siguiente: Capítulo VI" },
+    { archivo: "epilogo.html", titulo: "Volver al Inicio" }
 ];
 
-const indiceActual = ordenCapitulos.indexOf(paginaActual);
-let cargando = false;
+// Buscar la posición actual
+const indiceActual = ordenCapitulos.findIndex(cap => cap.archivo === paginaActual);
 
-// Cargar el siguiente capítulo al llegar al final
-async function cargarSiguienteCapitulo() {
-    if (cargando || indiceActual === -1 || indiceActual >= ordenCapitulos.length - 1) return;
+document.addEventListener("DOMContentLoaded", () => {
+    // Si estamos en una página válida dentro del orden
+    if (indiceActual !== -1 && indiceActual < ordenCapitulos.length - 1) {
+        const siguiente = ordenCapitulos[indiceActual + 1];
+        
+        // Contenedor del botón
+        const contenedorNavegacion = document.createElement("div");
+        contenedorNavegacion.className = "contenedor-siguiente";
 
-    cargando = true;
-    const siguienteArchivo = ordenCapitulos[indiceActual + 1];
+        // Enlace/Botón
+        const botonSiguiente = document.createElement("a");
+        botonSiguiente.href = siguiente.archivo;
+        botonSiguiente.className = "boton-capitulo";
+        botonSiguiente.textContent = siguiente.titulo;
 
-    try {
-        const respuesta = await fetch(siguienteArchivo);
-        if (!respuesta.ok) {
-            cargando = false;
-            return;
+        contenedorNavegacion.appendChild(botonSiguiente);
+
+        // Se inserta automáticamente dentro de la tarjeta de .libro
+        const libro = document.querySelector(".libro");
+        if (libro) {
+            libro.appendChild(contenedorNavegacion);
         }
-
-        const htmlTexto = await respuesta.text();
-
-        const parser = new DOMParser();
-        const doc = parser.parseFromString(htmlTexto, "text/html");
-        const nuevoCapitulo = doc.querySelector(".libro");
-
-        if (nuevoCapitulo) {
-            // Se inserta de forma vertical en el contenedor
-            const contenedorLibro = document.querySelector(".pagina");
-            contenedorLibro.appendChild(nuevoCapitulo);
-            
-            // Avanzamos el índice para no repetir capítulos al hacer scroll
-            indiceActual++;
-        }
-    } catch (error) {
-        console.error("Error al cargar el siguiente capítulo:", error);
-    } finally {
-        cargando = false;
-    }
-}
-
-// Escuchar el evento de Scroll
-window.addEventListener("scroll", () => {
-    const distancia = document.body.scrollHeight - window.innerHeight - window.scrollY;
-    // Carga cuando faltan 400px para llegar al final de la página
-    if (distancia < 400) {
-        cargarSiguienteCapitulo();
     }
 });
