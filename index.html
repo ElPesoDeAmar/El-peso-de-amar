@@ -2,15 +2,10 @@
 <html lang="es">
 
 <head>
-
     <meta charset="UTF-8">
-
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>El Peso de Amar</title>
-
     <link rel="stylesheet" href="style.css">
-
 </head>
 
 <body class="inicio">
@@ -27,11 +22,36 @@
             Queda prohibida la copia o distribucion total o parcial de esto sin mi autorizacion.
         </p>
 
-        <a href="capitulos/prologo.html" class="boton">
-            Iniciar
-        </a>
+        <!-- Botones en la portada -->
+        <div class="hero-botones">
+            <a href="capitulos/prologo.html" class="boton">
+                Iniciar
+            </a>
+            <button id="abrirIndicePortada" class="boton boton-secundario">
+                Índice
+            </button>
+        </div>
 
     </section>
+
+    <!-- Modal del Índice -->
+    <div id="modalIndice" class="modal-indice">
+        <div class="contenido-indice">
+            <button id="cerrarIndice" class="cerrar-btn">&times;</button>
+            <h2>Índice</h2>
+            <hr>
+            <ul>
+                <li><a href="capitulos/prologo.html">Prólogo</a></li>
+                <li><a href="capitulos/capitulo1.html">Capítulo I</a></li>
+                <li><a href="capitulos/capitulo2.html">Capítulo II</a></li>
+                <li><a href="capitulos/capitulo3.html">Capítulo III</a></li>
+                <li><a href="capitulos/capitulo4.html">Capítulo IV</a></li>
+                <li><a href="capitulos/capitulo5.html">Capítulo V</a></li>
+                <li><a href="capitulos/capitulo6.html">Capítulo VI</a></li>
+                <li><a href="capitulos/epilogo.html">Epílogo</a></li>
+            </ul>
+        </div>
+    </div>
 
     <script src="script.js"></script>
 

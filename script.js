@@ -40,3 +40,26 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     }
 });
+
+// Abrir/Cerrar Índice en Portada (index.html)
+document.addEventListener("DOMContentLoaded", () => {
+    const btnAbrirPortada = document.getElementById("abrirIndicePortada");
+    const btnCerrar = document.getElementById("cerrarIndice");
+    const modal = document.getElementById("modalIndice");
+
+    if (btnAbrirPortada && modal) {
+        btnAbrirPortada.addEventListener("click", () => {
+            modal.classList.add("activo");
+        });
+
+        btnCerrar.addEventListener("click", () => {
+            modal.classList.remove("activo");
+        });
+
+        modal.addEventListener("click", (e) => {
+            if (e.target === modal) {
+                modal.classList.remove("activo");
+            }
+        });
+    }
+});
