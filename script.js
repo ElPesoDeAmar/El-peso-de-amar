@@ -63,3 +63,55 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// Guardar progreso y controlar música
+document.addEventListener("DOMContentLoaded", () => {
+    const paginaActual = window.location.pathname.split("/").pop();
+
+    // 1. Guardar el capítulo actual si estamos en uno
+    if (paginaActual && paginaActual !== "index.html" && paginaActual !== "") {
+        localStorage.setItem("ultimoCapitulo", window.location.href);
+    }
+
+    // 2. Comprobar si hay progreso guardado en el index.html
+    if (paginaActual === "index.html" || paginaActual === "") {
+        const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
+        if (ultimoCapitulo) {
+            mostrarAvisoContinuar(ultimoCapitulo);
+        }
+    }
+
+    // 3. Control del reproductor de música
+    const btnMusica = document.getElementById("btnMusica");
+    const audio = document.getElementById("audioFondo");
+
+    if (btnMusica && audio) {
+        audio.volume = 0.3; // Volumen suave (30%)
+
+        btnMusica.addEventListener("click", () => {
+            if (audio.paused) {
+                audio.play();
+                btnMusica.textContent = "🔊";
+            } else {
+                audio.pause();
+                btnMusica.textContent = "🎵";
+            }
+        });
+    }
+});
+
+// Crear cartel para continuar lectura en el index
+function mostrarAvisoContinuar(url) {
+    const banner = document.createElement("div");
+    banner.className = "banner-continuar";
+    banner.innerHTML = `
+        <p>¿Quieres continuar donde lo dejaste?</p>
+        <a href="${url}" class="boton-continuar">Ir al capítulo</a>
+        <button id="cerrarBanner">&times;</button>
+    `;
+    document.body.appendChild(banner);
+
+    document.getElementById("cerrarBanner").addEventListener("click", () => {
+        banner.remove();
+    });
+}

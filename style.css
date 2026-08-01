@@ -418,3 +418,112 @@ body.inicio {
     color: #94754c;
     cursor: pointer;
 }
+
+/* ========================= */
+/* GUARDAR LECTURA */
+/* ========================= */
+
+.banner-continuar {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fdf8ef;
+    border: 1px solid #d9c49a;
+    padding: 15px 25px;
+    border-radius: 30px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    z-index: 1000;
+    color: #2c241d;
+    font-size: 15px;
+}
+
+.boton-continuar {
+    background: #2c241d;
+    color: #fdf8ef;
+    text-decoration: none;
+    padding: 6px 15px;
+    border-radius: 15px;
+    font-size: 13px;
+    font-family: 'Cinzel', serif;
+}
+
+#cerrarBanner {
+    background: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    color: #94754c;
+}
+
+/* ========================= */
+/* MUSICA */
+/* ========================= */
+
+.reproductor-musica {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+#btnMusica {
+    background: #2c241d;
+    color: #fdf8ef;
+    border: 1px solid #d9c49a;
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    cursor: pointer;
+    font-size: 18px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s ease;
+}
+
+#btnMusica:hover {
+    transform: scale(1.1);
+}
+
+/* ========================= */
+/* SOCIAL */
+/* ========================= */
+
+.seccion-mensaje {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+}
+
+.seccion-mensaje h3 {
+    font-family: 'Cinzel', serif;
+    color: #2c241d;
+    margin-bottom: 10px;
+}
+
+.seccion-mensaje p {
+    font-size: 16px !important;
+    text-indent: 0 !important;
+    text-align: center !important;
+    color: #666;
+    margin-bottom: 25px;
+}
+
+.boton-whatsapp {
+    display: inline-block;
+    background-color: #25d366;
+    color: white;
+    text-decoration: none;
+    padding: 14px 28px;
+    border-radius: 30px;
+    font-weight: bold;
+    font-size: 16px;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+    transition: transform 0.2s ease;
+}
+
+.boton-whatsapp:hover {
+    transform: scale(1.05);
+}
