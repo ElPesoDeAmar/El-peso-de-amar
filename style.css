@@ -124,9 +124,17 @@ body:has(.hero){
 /* LIBRO */
 /* ========================= */
 
+.libro-body{
+
+    background:#f4efe4;
+
+    color:#222;
+
+}
+
 .pagina{
 
-    background:#f8f4ea;
+    width:100%;
 
     min-height:100vh;
 
@@ -134,23 +142,15 @@ body:has(.hero){
 
     justify-content:center;
 
-    padding:60px 20px;
+    padding:80px 25px;
 
 }
 
 .libro{
 
-    background:#fffdf8;
-
-    width:850px;
+    width:900px;
 
     max-width:100%;
-
-    padding:70px;
-
-    border-radius:12px;
-
-    box-shadow:0 20px 60px rgba(0,0,0,.18);
 
 }
 
