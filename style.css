@@ -141,264 +141,139 @@ body.inicio{
 /* LIBRO */
 /* ========================= */
 
-.pagina{
-
-    min-height:100vh;
-
-    display:flex;
-
-    justify-content:center;
-
-    padding:80px 25px;
-
+.pagina {
+    /* Cambiamos min-height por height automático para que fluya bien al bajar */
+    min-height: auto;
+    display: flex;
+    justify-content: center;
+    padding: 40px 15px; /* Reducido para que respire mejor en cualquier pantalla */
 }
 
-.libro{
-
-    width:950px;
-
-    max-width:100%;
-
-    background:#fdf8ef;
-
-    padding:90px;
-
-    border:1px solid #d9c49a;
-
-    box-shadow:
-
-    0 0 40px rgba(0,0,0,.25),
-
-    inset 0 0 60px rgba(189,167,126,.12);
-
-    position:relative;
-
+.libro {
+    width: 950px;
+    max-width: 100%;
+    background: #fdf8ef;
+    padding: 60px 90px; /* Ajustado el padding superior/inferior */
+    border: 1px solid #d9c49a;
+    box-shadow: 
+        0 0 40px rgba(0,0,0,.25),
+        inset 0 0 60px rgba(189,167,126,.12);
+    position: relative;
+    overflow: hidden;
+    animation: aparecer .8s ease;
 }
 
-.libro{
-
-    overflow:hidden;
-
+.libro::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 10px; /* Un poco más estilizado */
+    height: 100%;
+    background: #d5b98b;
 }
 
-.libro::before{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    left:0;
-
-    width:14px;
-
-    height:100%;
-
-    background:#d5b98b;
-
+.libro::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 10px;
+    height: 100%;
+    background: #efe4cd;
 }
 
-.libro::after{
-
-    content:"";
-
-    position:absolute;
-
-    top:0;
-
-    right:0;
-
-    width:14px;
-
-    height:100%;
-
-    background:#efe4cd;
-
+.libro h1 {
+    font-family: 'Cinzel', serif;
+    font-size: 56px;
+    text-align: center;
+    color: #2c241d;
+    margin-bottom: 10px;
+    text-shadow: 1px 1px 2px rgba(0,0,0,.08);
 }
 
-.libro h1{
-
-    font-family:'Cinzel',serif;
-
-    font-size:56px;
-
-    text-align:center;
-
-    color:#2c241d;
-
-    margin-bottom:10px;
-
+.libro h4 {
+    text-align: center;
+    letter-spacing: 8px;
+    color: #94754c;
+    margin-bottom: 18px;
 }
 
-.libro h1{
-
-    text-shadow:1px 1px 2px rgba(0,0,0,.08);
-
+.libro h3 {
+    text-align: center;
+    color: #777;
+    font-weight: normal;
+    margin: 15px 0 30px;
 }
 
-.libro h4{
-
-    text-align:center;
-
-    letter-spacing:8px;
-
-    color:#94754c;
-
-    margin-bottom:18px;
-
+.libro hr {
+    width: 180px;
+    margin: 35px auto;
+    border: none;
+    border-top: 2px solid #ceb88d;
 }
 
-.libro h3{
-
-    text-align:center;
-
-    color:#777;
-
-    font-weight:normal;
-
-    margin:15px 0 30px;
-
+@keyframes aparecer {
+    from {
+        opacity: 0;
+        transform: translateY(35px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
-.libro hr{
-
-    width:180px;
-
-    margin:35px auto;
-
-    border:none;
-
-    border-top:2px solid #ceb88d;
-
+.libro p {
+    color: #2e2e2e;
+    font-size: 22px;
+    line-height: 2.2;
+    text-align: justify;
+    text-indent: 45px;
+    margin-bottom: 28px;
 }
 
-.libro{
-
-    animation:aparecer .8s ease;
-
-}
-
-@keyframes aparecer{
-
-from{
-
-opacity:0;
-
-transform:translateY(35px);
-
-}
-
-to{
-
-opacity:1;
-
-transform:translateY(0);
-
-}
-
-}
-
-.libro p{
-
-    color:#2e2e2e;
-
-    font-size:22px;
-
-    line-height:2.2;
-
-    text-align:justify;
-
-    text-indent:45px;
-
-    margin-bottom:28px;
-
-}
-
-.capitulo{
-
-    margin-top:100px;
-
-    padding-top:60px;
-
-    border-top:1px solid #d8d2c7;
-
+.capitulo {
+    margin-top: 100px;
+    padding-top: 60px;
+    border-top: 1px solid #d8d2c7;
 }
 
 /* ========================= */
 /* RESPONSIVE */
 /* ========================= */
 
-@media(max-width:768px){
-
-    .hero h1{
-
-        font-size:44px;
-
-        letter-spacing:2px;
-
+@media(max-width: 768px) {
+    .hero h1 {
+        font-size: 44px;
+        letter-spacing: 2px;
     }
 
-    .hero h2{
-
-        font-size:22px;
-
+    .hero h2 {
+        font-size: 22px;
     }
 
-    .hero p{
-
-        font-size:17px;
-
+    .hero p {
+        font-size: 17px;
     }
 
-    .libro{
-
-        padding:35px 25px;
-
+    .pagina {
+        padding: 20px 10px; /* Evita que la página pegue a los Yav De los bordes en celular */
     }
 
-    .libro h1{
-
-        font-size:34px;
-
+    .libro {
+        padding: 40px 20px; /* Márgenes internos adecuados para pantallas chicas */
     }
 
-    .libro p{
-
-        font-size:18px;
-
-        text-indent:25px;
-
-        line-height:1.9;
-
+    .libro h1 {
+        font-size: 30px;
     }
 
-}
-
-.libro .boton{
-
-    background:#4f3926;
-
-    color:white;
-
-    border:none;
-
-    padding:18px 55px;
-
-    border-radius:6px;
-
-    margin-top:20px;
-
-    transition:.3s;
-
-}
-
-.libro .boton:hover{
-
-    background:#2f2419;
-
-    transform:translateY(-3px);
-
+    .libro p {
+        font-size: 16px;
+        text-indent: 15px;
+        line-height: 1.8;
+    }
 }
 
 /* ========================= */
