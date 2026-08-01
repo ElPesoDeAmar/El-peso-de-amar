@@ -25,25 +25,29 @@ async function cargarSiguienteCapitulo() {
 
     try {
         const respuesta = await fetch(siguienteArchivo);
-        if (!respuesta.ok) return;
+        if (!respuesta.ok) {
+            cargando = false;
+            return;
+        }
 
         const htmlTexto = await respuesta.text();
 
-        // Extraer solo el contenido del <article class="libro"> para insertarlo abajo
         const parser = new DOMParser();
         const doc = parser.parseFromString(htmlTexto, "text/html");
         const nuevoCapitulo = doc.querySelector(".libro");
 
         if (nuevoCapitulo) {
-            // Añadir clase para dar margen superior al capítulo cargado
-            nuevoCapitulo.classList.add("capitulo");
-            
-            // Reemplazar o mover el botón de "Siguiente" al final del nuevo capítulo
+            // Se inserta de forma vertical en el contenedor
             const contenedorLibro = document.querySelector(".pagina");
             contenedorLibro.appendChild(nuevoCapitulo);
+            
+            // Avanzamos el índice para no repetir capítulos al hacer scroll
+            indiceActual++;
         }
     } catch (error) {
         console.error("Error al cargar el siguiente capítulo:", error);
+    } finally {
+        cargando = false;
     }
 }
 

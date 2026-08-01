@@ -138,105 +138,58 @@ body.inicio{
 }
 
 /* ========================= */
-/* LIBRO */
+/* LIBRO (CONTENEDOR Y APILAMIENTO VERTICAL) */
 /* ========================= */
 
 .pagina {
-    /* Cambiamos min-height por height automático para que fluya bien al bajar */
-    min-height: auto;
+    min-height: 100vh;
     display: flex;
-    justify-content: center;
-    padding: 40px 15px; /* Reducido para que respire mejor en cualquier pantalla */
+    flex-direction: column; /* <--- ESTO ARREGLA EL APILAMIENTO EN VERTICAL */
+    align-items: center;    /* Centra las páginas horizontalmente */
+    width: 100%;
+    padding: 40px 15px;
 }
 
 .libro {
-    width: 950px;
-    max-width: 100%;
+    width: 100%;
+    max-width: 850px;        /* Ancho máximo cómodo para la lectura */
     background: #fdf8ef;
-    padding: 60px 90px; /* Ajustado el padding superior/inferior */
+    padding: 60px 80px;
     border: 1px solid #d9c49a;
     box-shadow: 
-        0 0 40px rgba(0,0,0,.25),
+        0 10px 30px rgba(0,0,0,.18),
         inset 0 0 60px rgba(189,167,126,.12);
     position: relative;
     overflow: hidden;
     animation: aparecer .8s ease;
+    margin-bottom: 50px;     /* Separación entre capítulos cuando se apilan */
 }
 
-.libro::before {
-    content: "";
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 10px; /* Un poco más estilizado */
-    height: 100%;
-    background: #d5b98b;
-}
-
-.libro::after {
-    content: "";
-    position: absolute;
-    top: 0;
-    right: 0;
-    width: 10px;
-    height: 100%;
-    background: #efe4cd;
-}
-
-.libro h1 {
-    font-family: 'Cinzel', serif;
-    font-size: 56px;
-    text-align: center;
-    color: #2c241d;
-    margin-bottom: 10px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,.08);
-}
-
-.libro h4 {
-    text-align: center;
-    letter-spacing: 8px;
-    color: #94754c;
-    margin-bottom: 18px;
-}
-
-.libro h3 {
-    text-align: center;
-    color: #777;
-    font-weight: normal;
-    margin: 15px 0 30px;
-}
-
-.libro hr {
-    width: 180px;
-    margin: 35px auto;
-    border: none;
-    border-top: 2px solid #ceb88d;
-}
-
-@keyframes aparecer {
-    from {
-        opacity: 0;
-        transform: translateY(35px);
+/* Ajustes para pantallas pequeñas (Android/Móviles) */
+@media(max-width: 768px) {
+    .pagina {
+        padding: 20px 10px;
     }
-    to {
-        opacity: 1;
-        transform: translateY(0);
+
+    .libro {
+        padding: 35px 20px;   /* Reduce el relleno interno para que no quede comprimido */
+        margin-bottom: 30px;
     }
-}
 
-.libro p {
-    color: #2e2e2e;
-    font-size: 22px;
-    line-height: 2.2;
-    text-align: justify;
-    text-indent: 45px;
-    margin-bottom: 28px;
-}
+    .libro h1 {
+        font-size: 32px;
+    }
 
-.capitulo {
-    margin-top: 100px;
-    padding-top: 60px;
-    border-top: 1px solid #d8d2c7;
+    .libro h4 {
+        letter-spacing: 4px;
+        font-size: 13px;
+    }
+
+    .libro p {
+        font-size: 17px;
+        text-indent: 20px;
+        line-height: 1.8;
+    }
 }
 
 /* ========================= */
