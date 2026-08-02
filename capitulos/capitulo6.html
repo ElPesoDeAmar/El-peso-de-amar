@@ -14,6 +14,14 @@
 
     <section class="pagina">
         <article class="libro">
+
+            <!-- Controles de tamaño de letra -->
+            <div class="controles-texto">
+                <button id="disminuirTexto" title="Disminuir texto">A-</button>
+                <button id="restablecerTexto" title="Tamaño normal">A</button>
+                <button id="aumentarTexto" title="Aumentar texto">A+</button>
+            </div>
+
             <header>
                 <h4>EL PESO DE AMAR</h4>
                 <h1>Capítulo VI</h1>
@@ -26,21 +34,23 @@
                     Este libro no habla de una historia perfecta.
                 </p>
                 <p>
-                    Habla de dos personas que intentaron construir algo mientras aprendian a vivir y a madurar en el proceso, habla de los errores que enseñan, de las heridas que cambian la forma en que vemos el mundo y sobre todo habla de una verdad que muchas personas olvidan:
+                    Habla de dos personas que intentaron construir algo mientras aprendian a vivir y a madurar en el proceso, habla de los errores que enseñan, de las heridas que cambian la forma en que vemos el mundo y sobre todo habla de una verdad que muchas personas olvidan simplemente por orgullo.
                 </p>
                 <p style="text-align: center; font-weight: bold; text-indent: 0;">
-                    Hoy estamos aquí, Mañana nadie lo sabe.
+                    Hoy estamos aqui, Mañana nadie lo sabe.
                 </p>
+            </div>
+
         </article>
     </section>
 
-    <script src="../script.js"></script>
+    <!-- Reproductor de Música -->
+    <div class="reproductor-musica">
+        <button id="btnMusica" title="Reproducir / Pausar Música">🎵</button>
+        <audio id="audioFondo" loop src="../assets/musica.mp3"></audio> 
+    </div>
 
-<div class="reproductor-musica">
-    <button id="btnMusica" title="Reproducir / Pausar Música">🎵</button>
-    <!-- Sube un nivel (../) para encontrar la carpeta assets/ -->
-    <audio id="audioFondo" loop src="../assets/musica.mp3"></audio> 
-</div>
+    <script src="../script.js"></script>
 
 </body>
 </html>

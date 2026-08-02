@@ -14,6 +14,14 @@
 
     <section class="pagina">
         <article class="libro">
+
+            <!-- Controles de tamaño de letra -->
+            <div class="controles-texto">
+                <button id="disminuirTexto" title="Disminuir texto">A-</button>
+                <button id="restablecerTexto" title="Tamaño normal">A</button>
+                <button id="aumentarTexto" title="Aumentar texto">A+</button>
+            </div>
+
             <header>
                 <h4>EL PESO DE AMAR</h4>
                 <h1>Capítulo II</h1>
@@ -23,24 +31,32 @@
 
             <div id="contenido">
                 <p>
-                    La conoci en el liceo aunque No fue el lugar lo que hizo especial, fue ella.
+                    La conoci en el liceo, ella me parecia linda pero tenia una relacion y no quise hacerme ideas en mi cabeza, hasta que llega el dia en que nuestras palabras se cruzan y empece a sentir emociones por ella, aunque no fue el lugar lo que hizo especial, era su esencia.
                 </p>
                 <p>
-                    Lo primero en que me fije fue su manera de ser, habia algo en su mirada que hacia que todo el  alrededor perdiera importancia, era como si el tiempo decidiera detenerse solo para permitirme ver su mirada.
+                    Me fije en su manera de ser, su mirada, habia algo en su mirada que me llamaba la atencion, algo tan raro que hacia que todo a mi alrededor perdiera importancia y mi voz se hiba, era como si por un segundo el tiempo se detubiera solo para permitirme contemplarla en silencio.
                 </p>
                 <p>
-                    Ese mismo dia senti algo dificil de explicar, fue como encontrar aquello que tanto le pedia a dios, pero junto a esa felicidad tambien nacio el miedo, el mundo nunca ha sido perfecto y yo temia que fallara antes de comenzar.
+                    Ese mismo dia senti algo raro de explicar, cosquillas en el estomago y nervios, fue la sensacion exacta de haber encontrado aquello que tanto tiempo le estuve pidiendo a dios, me senti comodo y seguro con ella, pero junto a esa felicidad tambien nacio el miedo.
                 </p>
+                <p>
+                    El mundo nunca ha sido perfecto y yo siempre he llevado mis propias dudas, tenia miedo de arruinarlo sin comenzar, de decirle algo que no le guste o de que simplemente fuera un sueño del que me tocaria despertar tarde o temprano.
+                </p>
+                <p>
+                    Aun con ese temor, supe desde ese primer cruce de palabras que ya no habia vuelta atras, mi corazon la habia elegido a ella y estaba dispuesto a asumir todo el peso que eso significaria.
+                </p>
+            </div>
+
         </article>
     </section>
 
-    <script src="../script.js"></script>
+    <!-- Reproductor de Música -->
+    <div class="reproductor-musica">
+        <button id="btnMusica" title="Reproducir / Pausar Música">🎵</button>
+        <audio id="audioFondo" loop src="../assets/musica.mp3"></audio> 
+    </div>
 
-<div class="reproductor-musica">
-    <button id="btnMusica" title="Reproducir / Pausar Música">🎵</button>
-    <!-- Sube un nivel (../) para encontrar la carpeta assets/ -->
-    <audio id="audioFondo" loop src="../assets/musica.mp3"></audio> 
-</div>
+    <script src="../script.js"></script>
 
 </body>
 </html>

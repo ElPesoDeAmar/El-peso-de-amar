@@ -14,6 +14,14 @@
 
     <section class="pagina">
         <article class="libro">
+
+            <!-- Controles de tamaño de letra -->
+            <div class="controles-texto">
+                <button id="disminuirTexto" title="Disminuir texto">A-</button>
+                <button id="restablecerTexto" title="Tamaño normal">A</button>
+                <button id="aumentarTexto" title="Aumentar texto">A+</button>
+            </div>
+
             <header>
                 <h4>EL PESO DE AMAR</h4>
                 <h1>Capítulo IV</h1>
@@ -23,27 +31,32 @@
 
             <div id="contenido">
                 <p>
-                    Con el tiempo llegaron las peleas, descubrimos que amar tambien significa equivocarse, muchas veces me tocaba insistir para arreglar las cosas porque no queria perderla, por eso siempre dejaba el orgullo a un lado.
+                    Con el tiempo llegaron las peleas, descubrimos que amar tambien significa equivocarse y tropezar en el camino, muchas veces me tocaba insistir para arreglar las cosas porque el pensamiento de perderla me pesaba mas que cualquier diferencia, por eso siempre preferia dejar el orgullo a un lado, asi me vea como un migajero.
                 </p>
                 <p>
-                    Fue entonces cuando entendi que nadie sabe realmente lo que tiene hasta que lo pierde.
+                    Fue entonces cuando entendi que nadie sabe realmente lo que tiene hasta que siente el miedo de perderlo, que las discusiones duelen mas cuando la persona que tienes enfrente es exactamente a quien no quieres lastimar.
                 </p>
                 <p>
-                    Ella cambio mi manera de ver la vida, nunca necesito decirme que fuera fuerte porque su sola existencia me daba razones para seguir adelante, sus palabras me hacian querer ser mejor.
+                    Ella cambio por completo mi manera de ver la vida, nunca necesito decirme que fuera fuerte porque su sola existencia me daba razones para seguir adelante, sus palabras y su forma de estar me hacian querer ser una mejor persona cada dia.
                 </p>
                 <p>
-                    Gracias a ella descubri una version de mi que realmente no conocia, un niño que solo quería sentirse amado y que por primera vez se permitia demostrar cariño sin miedo.
+                    Gracias a ella descubri una version de mi que realmente no conocia, salio a la luz un niño que solo queria sentir ese amor que nunca tubo, alguien que por primera vez en mucho tiempo se permitia demostrar cariño sincero y vulnerabilidad sin tener miedo a ser juzgado.
                 </p>
+                <p>
+                    Aprender a amar en medio de los errores no fue facil, pero cada tropiezo me demostro que cuando alguien te importa de verdad, no buscas tener la razon, sino cuidar ese vinculo que con amor fueron construyendo.
+                </p>
+            </div>
+
         </article>
     </section>
 
-    <script src="../script.js"></script>
+    <!-- Reproductor de Música -->
+    <div class="reproductor-musica">
+        <button id="btnMusica" title="Reproducir / Pausar Música">🎵</button>
+        <audio id="audioFondo" loop src="../assets/musica.mp3"></audio> 
+    </div>
 
-<div class="reproductor-musica">
-    <button id="btnMusica" title="Reproducir / Pausar Música">🎵</button>
-    <!-- Sube un nivel (../) para encontrar la carpeta assets/ -->
-    <audio id="audioFondo" loop src="../assets/musica.mp3"></audio> 
-</div>
+    <script src="../script.js"></script>
 
 </body>
 </html>
