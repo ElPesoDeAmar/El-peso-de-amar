@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Epílogo | El Peso de Amar</title>
     <link rel="stylesheet" href="../style.css">
 </head>
+
 <body class="libro-body">
 
     <nav id="indice">
@@ -31,9 +33,31 @@
                 <p class="final" style="text-align: center; margin-top: 40px; text-indent: 0;">
                     <strong>Fin, Gracias por tomarse el tiempo.</strong>
                 </p>
+            </div>
+
+            <!-- Sección de WhatsApp integrada con diseño del libro -->
+            <div class="seccion-mensaje">
+                <div class="linea-decorativa"><span>❦</span></div>
+                <h3>¿Quieres decirme algo?</h3>
+                <p>Aqui dejo mi whatsapp por alguna duda o recomendacion de este libro.</p>
+                
+                <a href="https://wa.me/584242502500?text=Acabo%20de%20terminar%20de%20leer%20El%20Peso%20de%20Amar...%20❤️" 
+                   target="_blank" 
+                   class="boton-whatsapp">
+                    <span class="icono-wa">💬</span> Mi whatsapp
+                </a>
+            </div>
+
         </article>
     </section>
 
+    <!-- Reproductor de Música -->
+    <div class="reproductor-musica">
+        <button id="btnMusica" title="Reproducir / Pausar Música">🎵</button>
+        <audio id="audioFondo" loop src="../assets/musica.mp3"></audio> 
+    </div>
+
     <script src="../script.js"></script>
+
 </body>
 </html>
