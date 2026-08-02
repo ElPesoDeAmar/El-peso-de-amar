@@ -488,42 +488,66 @@ body.inicio {
 }
 
 /* ========================= */
-/* SOCIAL */
+/* SECCIÓN MENSAJE FINAL (EPÍLOGO) */
 /* ========================= */
 
 .seccion-mensaje {
     text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
+    margin-top: 50px;
+    padding: 30px 20px 10px;
+    border-top: 1px solid #e0d1b3;
+    animation: aparecer 1s ease;
+}
+
+.linea-decorativa {
+    font-size: 20px;
+    color: #ceb88d;
+    margin-bottom: 10px;
 }
 
 .seccion-mensaje h3 {
     font-family: 'Cinzel', serif;
     color: #2c241d;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 12px;
 }
 
 .seccion-mensaje p {
-    font-size: 16px !important;
+    font-size: 17px !important;
     text-indent: 0 !important;
     text-align: center !important;
-    color: #666;
-    margin-bottom: 25px;
+    color: #665b4e;
+    max-width: 550px;
+    margin: 0 auto 30px !important;
+    line-height: 1.6 !important;
 }
 
 .boton-whatsapp {
-    display: inline-block;
-    background-color: #25d366;
-    color: white;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background-color: #2c241d;
+    color: #fdf8ef;
     text-decoration: none;
-    padding: 14px 28px;
-    border-radius: 30px;
-    font-weight: bold;
-    font-size: 16px;
-    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
-    transition: transform 0.2s ease;
+    padding: 16px 36px;
+    border-radius: 40px;
+    font-family: 'Cinzel', serif;
+    font-size: 15px;
+    letter-spacing: 1px;
+    border: 1px solid #d9c49a;
+    box-shadow: 0 6px 18px rgba(44, 36, 29, 0.25);
+    transition: all 0.3s ease;
 }
 
 .boton-whatsapp:hover {
-    transform: scale(1.05);
+    background-color: #25d366; /* Cambia a verde sutil solo cuando pasa el cursor por encima */
+    color: #ffffff;
+    border-color: #25d366;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 22px rgba(37, 211, 102, 0.35);
+}
+
+.icono-wa {
+    font-size: 18px;
 }
