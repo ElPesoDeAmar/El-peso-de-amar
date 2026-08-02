@@ -1,49 +1,59 @@
 // Detectar el archivo actual
 const paginaActual = window.location.pathname.split("/").pop() || "prologo.html";
 
-// Lista ordenada de tu libro
+// Lista ordenada de tu libro con nombres exactos de los capítulos
 const ordenCapitulos = [
-    { archivo: "prologo.html", titulo: "Ir al Capítulo I" },
-    { archivo: "capitulo1.html", titulo: "Siguiente: Capítulo I" },
-    { archivo: "capitulo2.html", titulo: "Siguiente: Capítulo II" },
-    { archivo: "capitulo3.html", titulo: "Siguiente: Capítulo III" },
-    { archivo: "capitulo4.html", titulo: "Siguiente: Capítulo IV" },
-    { archivo: "capitulo5.html", titulo: "Siguiente: Capítulo V" },
-    { archivo: "capitulo6.html", titulo: "Siguiente: Capítulo VI" },
-    { archivo: "epilogo.html", titulo: "Epilogo" }
+    { archivo: "prologo.html", titulo: "Prólogo" },
+    { archivo: "capitulo1.html", titulo: "Capítulo I" },
+    { archivo: "capitulo2.html", titulo: "Capítulo II" },
+    { archivo: "capitulo3.html", titulo: "Capítulo III" },
+    { archivo: "capitulo4.html", titulo: "Capítulo IV" },
+    { archivo: "capitulo5.html", titulo: "Capítulo V" },
+    { archivo: "capitulo6.html", titulo: "Capítulo VI" },
+    { archivo: "epilogo.html", titulo: "Epílogo" }
 ];
 
 // Buscar la posición actual
 const indiceActual = ordenCapitulos.findIndex(cap => cap.archivo === paginaActual);
 
 document.addEventListener("DOMContentLoaded", () => {
-    // Si estamos en una página válida dentro del orden
-    if (indiceActual !== -1 && indiceActual < ordenCapitulos.length - 1) {
-        const siguiente = ordenCapitulos[indiceActual + 1];
-        
-        // Contenedor del botón
-        const contenedorNavegacion = document.createElement("div");
-        contenedorNavegacion.className = "contenedor-siguiente";
-
-        // Enlace/Botón
-        const botonSiguiente = document.createElement("a");
-        botonSiguiente.href = siguiente.archivo;
-        botonSiguiente.className = "boton-capitulo";
-        botonSiguiente.textContent = siguiente.titulo;
-
-        contenedorNavegacion.appendChild(botonSiguiente);
-
-        // Se inserta automáticamente dentro de la tarjeta de .libro
+    // Si estamos en un capítulo válido
+    if (indiceActual !== -1) {
         const libro = document.querySelector(".libro");
-        if (libro) {
+        
+        // Evitamos crear duplicados en el epílogo ya que lo manejaste manual
+        if (libro && paginaActual !== "epilogo.html") {
+            const contenedorNavegacion = document.createElement("div");
+            contenedorNavegacion.className = "contenedor-siguiente";
+
+            // 1. Botón "Atrás"
+            if (indiceActual > 0) {
+                const anterior = ordenCapitulos[indiceActual - 1];
+                const botonAnterior = document.createElement("a");
+                botonAnterior.href = anterior.archivo;
+                botonAnterior.className = "boton-capitulo boton-atras";
+                botonAnterior.textContent = `← Atrás: ${anterior.titulo}`;
+                contenedorNavegacion.appendChild(botonAnterior);
+            }
+
+            // 2. Botón "Siguiente"
+            if (indiceActual < ordenCapitulos.length - 1) {
+                const siguiente = ordenCapitulos[indiceActual + 1];
+                const botonSiguiente = document.createElement("a");
+                botonSiguiente.href = siguiente.archivo;
+                botonSiguiente.className = "boton-capitulo";
+                botonSiguiente.textContent = `Siguiente: ${siguiente.titulo} →`;
+                contenedorNavegacion.appendChild(botonSiguiente);
+            }
+
             libro.appendChild(contenedorNavegacion);
         }
     }
 });
 
-// Abrir/Cerrar Índice en Portada (index.html)
+// Abrir/Cerrar Índice en Portada e Interiores
 document.addEventListener("DOMContentLoaded", () => {
-    const btnAbrirPortada = document.getElementById("abrirIndicePortada");
+    const btnAbrirPortada = document.getElementById("abrirIndicePortada") || document.getElementById("abrirIndice");
     const btnCerrar = document.getElementById("cerrarIndice");
     const modal = document.getElementById("modalIndice");
 
@@ -52,9 +62,11 @@ document.addEventListener("DOMContentLoaded", () => {
             modal.classList.add("activo");
         });
 
-        btnCerrar.addEventListener("click", () => {
-            modal.classList.remove("activo");
-        });
+        if (btnCerrar) {
+            btnCerrar.addEventListener("click", () => {
+                modal.classList.remove("activo");
+            });
+        }
 
         modal.addEventListener("click", (e) => {
             if (e.target === modal) {
