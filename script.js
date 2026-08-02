@@ -10,7 +10,7 @@ const ordenCapitulos = [
     { archivo: "capitulo4.html", titulo: "Siguiente: Capítulo IV" },
     { archivo: "capitulo5.html", titulo: "Siguiente: Capítulo V" },
     { archivo: "capitulo6.html", titulo: "Siguiente: Capítulo VI" },
-    { archivo: "epilogo.html", titulo: "Volver al Inicio" }
+    { archivo: "epilogo.html", titulo: "Epilogo" }
 ];
 
 // Buscar la posición actual
