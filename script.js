@@ -1,129 +1,307 @@
-// Detectar el archivo actual
-const paginaActual = window.location.pathname.split("/").pop() || "prologo.html";
+(() => {
+    "use strict";
 
-// Lista ordenada de tu libro con nombres exactos de los capítulos
-const ordenCapitulos = [
-    { archivo: "prologo.html", titulo: "Prólogo" },
-    { archivo: "capitulo1.html", titulo: "Capítulo I" },
-    { archivo: "capitulo2.html", titulo: "Capítulo II" },
-    { archivo: "capitulo3.html", titulo: "Capítulo III" },
-    { archivo: "capitulo4.html", titulo: "Capítulo IV" },
-    { archivo: "capitulo5.html", titulo: "Capítulo V" },
-    { archivo: "capitulo6.html", titulo: "Capítulo VI" },
-    { archivo: "epilogo.html", titulo: "Epílogo" }
-];
+    /* ==========================================
+       CONFIGURACIÓN
+    ========================================== */
 
-// Buscar la posición actual
-const indiceActual = ordenCapitulos.findIndex(cap => cap.archivo === paginaActual);
+    const CAPITULOS = [
+        { archivo: "prologo.html", titulo: "Prólogo" },
+        { archivo: "capitulo1.html", titulo: "Capítulo I" },
+        { archivo: "capitulo2.html", titulo: "Capítulo II" },
+        { archivo: "capitulo3.html", titulo: "Capítulo III" },
+        { archivo: "capitulo4.html", titulo: "Capítulo IV" },
+        { archivo: "capitulo5.html", titulo: "Capítulo V" },
+        { archivo: "epilogo.html", titulo: "Epílogo" }
+    ];
 
-document.addEventListener("DOMContentLoaded", () => {
-    // Si estamos en un capítulo válido
-    if (indiceActual !== -1) {
+    const PAGINA = location.pathname.split("/").pop() || "prologo.html";
+    const INDICE = CAPITULOS.findIndex(c => c.archivo === PAGINA);
+
+    document.addEventListener("DOMContentLoaded", iniciar);
+
+    /* ==========================================
+       INICIO
+    ========================================== */
+
+    function iniciar() {
+
+        crearNavegacion();
+
+        configurarIndice();
+
+        guardarProgreso();
+
+        configurarMusica();
+
+        restaurarScroll();
+
+        guardarScroll();
+
+        configurarAtajos();
+
+    }
+
+    /* ==========================================
+       NAVEGACIÓN ENTRE CAPÍTULOS
+    ========================================== */
+
+    function crearNavegacion() {
+
+        if (PAGINA === "epilogo.html") return;
+
         const libro = document.querySelector(".libro");
-        
-        // Evitamos crear duplicados en el epílogo ya que lo manejaste manual
-        if (libro && paginaActual !== "epilogo.html") {
-            const contenedorNavegacion = document.createElement("div");
-            contenedorNavegacion.className = "contenedor-siguiente";
 
-            // 1. Botón "Atrás"
-            if (indiceActual > 0) {
-                const anterior = ordenCapitulos[indiceActual - 1];
-                const botonAnterior = document.createElement("a");
-                botonAnterior.href = anterior.archivo;
-                botonAnterior.className = "boton-capitulo boton-atras";
-                botonAnterior.textContent = `← Atrás: ${anterior.titulo}`;
-                contenedorNavegacion.appendChild(botonAnterior);
-            }
+        if (!libro || INDICE === -1) return;
 
-            // 2. Botón "Siguiente"
-            if (indiceActual < ordenCapitulos.length - 1) {
-                const siguiente = ordenCapitulos[indiceActual + 1];
-                const botonSiguiente = document.createElement("a");
-                botonSiguiente.href = siguiente.archivo;
-                botonSiguiente.className = "boton-capitulo";
-                botonSiguiente.textContent = `Siguiente: ${siguiente.titulo} →`;
-                contenedorNavegacion.appendChild(botonSiguiente);
-            }
+        const nav = document.createElement("nav");
+        nav.className = "contenedor-siguiente";
 
-            libro.appendChild(contenedorNavegacion);
+        if (INDICE > 0) {
+
+            nav.appendChild(
+                crearBoton(
+                    CAPITULOS[INDICE - 1],
+                    true
+                )
+            );
+
         }
+
+        if (INDICE < CAPITULOS.length - 1) {
+
+            nav.appendChild(
+                crearBoton(
+                    CAPITULOS[INDICE + 1],
+                    false
+                )
+            );
+
+        }
+
+        libro.append(nav);
+
     }
-});
 
-// Abrir/Cerrar Índice en Portada e Interiores
-document.addEventListener("DOMContentLoaded", () => {
-    const btnAbrirPortada = document.getElementById("abrirIndicePortada") || document.getElementById("abrirIndice");
-    const btnCerrar = document.getElementById("cerrarIndice");
-    const modal = document.getElementById("modalIndice");
+    function crearBoton(capitulo, atras = false) {
 
-    if (btnAbrirPortada && modal) {
-        btnAbrirPortada.addEventListener("click", () => {
+        const a = document.createElement("a");
+
+        a.href = capitulo.archivo;
+
+        a.className = `boton-capitulo ${atras ? "boton-atras" : ""}`;
+
+        a.innerHTML = atras
+            ? `← ${capitulo.titulo}`
+            : `${capitulo.titulo} →`;
+
+        return a;
+
+    }
+
+    /* ==========================================
+       MODAL ÍNDICE
+    ========================================== */
+
+    function configurarIndice() {
+
+        const modal = document.getElementById("modalIndice");
+
+        if (!modal) return;
+
+        const abrir =
+            document.getElementById("abrirIndice") ||
+            document.getElementById("abrirIndicePortada");
+
+        const cerrar =
+            document.getElementById("cerrarIndice");
+
+        abrir?.addEventListener("click", () => {
+
             modal.classList.add("activo");
+
         });
 
-        if (btnCerrar) {
-            btnCerrar.addEventListener("click", () => {
-                modal.classList.remove("activo");
+        cerrar?.addEventListener("click", cerrarModal);
+
+        modal.addEventListener("click", e => {
+
+            if (e.target === modal)
+                cerrarModal();
+
+        });
+
+        function cerrarModal() {
+
+            modal.classList.remove("activo");
+
+        }
+
+    }
+
+    /* ==========================================
+       GUARDAR PROGRESO
+    ========================================== */
+
+    function guardarProgreso() {
+
+        if (PAGINA !== "index.html") {
+
+            localStorage.setItem(
+                "ultimoCapitulo",
+                location.href
+            );
+
+        }
+
+        else {
+
+            const ultimo =
+                localStorage.getItem("ultimoCapitulo");
+
+            if (ultimo)
+                crearBanner(ultimo);
+
+        }
+
+    }
+
+    function crearBanner(url) {
+
+        const banner = document.createElement("div");
+
+        banner.className = "banner-continuar";
+
+        banner.innerHTML = `
+            <p>Continuar leyendo</p>
+
+            <a href="${url}" class="boton-continuar">
+
+                Abrir último capítulo
+
+            </a>
+
+            <button>
+
+                ✕
+
+            </button>
+        `;
+
+        banner.querySelector("button")
+            .onclick = () => banner.remove();
+
+        document.body.appendChild(banner);
+
+    }
+
+    /* ==========================================
+       MÚSICA
+    ========================================== */
+
+    function configurarMusica() {
+
+        const audio =
+            document.getElementById("audioFondo");
+
+        const boton =
+            document.getElementById("btnMusica");
+
+        if (!audio || !boton) return;
+
+        audio.volume = .3;
+
+        boton.addEventListener("click", () => {
+
+            audio.paused
+                ? audio.play()
+                : audio.pause();
+
+            boton.textContent =
+                audio.paused ? "🎵" : "🔊";
+
+        });
+
+    }
+
+    /* ==========================================
+       GUARDAR POSICIÓN DE LECTURA
+    ========================================== */
+
+    function guardarScroll() {
+
+        window.addEventListener("beforeunload", () => {
+
+            localStorage.setItem(
+                "scroll_" + PAGINA,
+                window.scrollY
+            );
+
+        });
+
+    }
+
+    function restaurarScroll() {
+
+        const pos = localStorage.getItem(
+            "scroll_" + PAGINA
+        );
+
+        if (!pos) return;
+
+        setTimeout(() => {
+
+            scrollTo({
+                top: Number(pos),
+                behavior: "smooth"
             });
-        }
 
-        modal.addEventListener("click", (e) => {
-            if (e.target === modal) {
-                modal.classList.remove("activo");
+        }, 200);
+
+    }
+
+    /* ==========================================
+       ATAJOS DEL TECLADO
+    ========================================== */
+
+    function configurarAtajos() {
+
+        document.addEventListener("keydown", e => {
+
+            if (e.target.tagName === "INPUT") return;
+
+            switch (e.key) {
+
+                case "ArrowRight":
+
+                    if (INDICE < CAPITULOS.length - 1)
+
+                        location.href =
+                            CAPITULOS[INDICE + 1].archivo;
+
+                    break;
+
+                case "ArrowLeft":
+
+                    if (INDICE > 0)
+
+                        location.href =
+                            CAPITULOS[INDICE - 1].archivo;
+
+                    break;
+
+                case "Escape":
+
+                    document
+                        .getElementById("modalIndice")
+                        ?.classList.remove("activo");
+
+                    break;
+
             }
+
         });
-    }
-});
 
-// Guardar progreso y controlar música
-document.addEventListener("DOMContentLoaded", () => {
-    const paginaActual = window.location.pathname.split("/").pop();
-
-    // 1. Guardar el capítulo actual si estamos en uno
-    if (paginaActual && paginaActual !== "index.html" && paginaActual !== "") {
-        localStorage.setItem("ultimoCapitulo", window.location.href);
     }
 
-    // 2. Comprobar si hay progreso guardado en el index.html
-    if (paginaActual === "index.html" || paginaActual === "") {
-        const ultimoCapitulo = localStorage.getItem("ultimoCapitulo");
-        if (ultimoCapitulo) {
-            mostrarAvisoContinuar(ultimoCapitulo);
-        }
-    }
-
-    // 3. Control del reproductor de música
-    const btnMusica = document.getElementById("btnMusica");
-    const audio = document.getElementById("audioFondo");
-
-    if (btnMusica && audio) {
-        audio.volume = 0.3; // Volumen suave (30%)
-
-        btnMusica.addEventListener("click", () => {
-            if (audio.paused) {
-                audio.play();
-                btnMusica.textContent = "🔊";
-            } else {
-                audio.pause();
-                btnMusica.textContent = "🎵";
-            }
-        });
-    }
-});
-
-// Crear cartel para continuar lectura en el index
-function mostrarAvisoContinuar(url) {
-    const banner = document.createElement("div");
-    banner.className = "banner-continuar";
-    banner.innerHTML = `
-        <p>¿Quieres continuar donde lo dejaste?</p>
-        <a href="${url}" class="boton-continuar">Ir al capítulo</a>
-        <button id="cerrarBanner">&times;</button>
-    `;
-    document.body.appendChild(banner);
-
-    document.getElementById("cerrarBanner").addEventListener("click", () => {
-        banner.remove();
-    });
-}
+})();
